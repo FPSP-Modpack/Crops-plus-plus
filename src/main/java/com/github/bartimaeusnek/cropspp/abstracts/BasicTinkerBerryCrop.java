@@ -5,6 +5,7 @@ import ic2.api.crops.ICropTile;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -90,7 +91,10 @@ public abstract class BasicTinkerBerryCrop extends BasicCrop {
 
     @Override
     public List<String> getCropInformation() {
-        return (List<String>) Arrays.asList(new String[]{"Needs a block of " + OreDictionary.getOres(hasBlock()).get(0).getDisplayName() + " Below to fully mature.", "Needs a light level below or equal to 10 to fully mature.", "Has increased Nutrient requirements (x1.5) and decreased humidity requirements (x0.5)", "Hurt Player on collision"});
+    	List<ItemStack> ores = OreDictionary.getOres(hasBlock());
+    	if (ores.isEmpty())
+    		return null;
+        return (List<String>) Arrays.asList(new String[]{"Needs a block of " + ores.get(0).getDisplayName() + " Below to fully mature.", "Needs a light level below or equal to 10 to fully mature.", "Has increased Nutrient requirements (x1.5) and decreased humidity requirements (x0.5)", "Hurt Player on collision"});
     }
 
     @Override
